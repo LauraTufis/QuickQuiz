@@ -15,8 +15,7 @@ Quick Quiz este o aplicație web educațională de tip quiz, destinată testări
 
 3. ADRESA REPOZITORIULUI GIT
 -----------------------------
-https://gitlab.upt.ro/username/quick-quiz  
-(înlocuiți „username” cu numele de utilizator real GitLab)
+https://github.com/LauraTufis/QuickQuiz 
 
 4. TEHNOLOGII UTILIZATE
 ------------------------
