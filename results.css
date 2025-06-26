@@ -1,0 +1,75 @@
+body {
+  background-color: #ecf5ff;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.results-box {
+  background-color: #fff;
+  padding: 4rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  margin-bottom: 2rem;
+  color: #56a5eb;
+}
+
+#userScore {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#highScoresList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.high-score {
+  background-color: #f1f1f1;
+  margin: 1rem 0;
+  padding: 1.2rem 2rem;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-group {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Butoane */
+.btn {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  border: 1px solid #56a5eb;
+  background-color: white;
+  color: #56a5eb;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #56a5eb;
+  color: white;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Quick Quiz</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <div class="container flex-center flex-column">
+    <h1>Register</h1>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Create Account</button>
+      <p class="error" id="error"></p>
+    </form>
+    <a class="btn" href="/" style="margin-top: 30px;">Back to Home</a>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>

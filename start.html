@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Start Quiz</title>
+  <link rel="stylesheet" href="app.css" />
+  <style>
+    form {
+      width: 250px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container flex-center flex-column">
+    <h1>Alege opțiunile pentru quiz</h1>
+
+    <form id="startForm">
+      <label for="category">Categorie:</label>
+      <select id="category" name="category">
+        <option value="">Oricare</option>
+        <option value="Geografie">Geografie</option>
+        <option value="Istorie">Istorie</option>
+        <option value="Artă">Artă</option>
+        <option value="Matematică">Matematică</option>
+      </select>
+
+      <label for="difficulty">Dificultate:</label>
+      <select id="difficulty" name="difficulty">
+        <option value="">Oricare</option>
+        <option value="easy">Ușor</option>
+        <option value="medium">Mediu</option>
+        <option value="hard">Dificil</option>
+      </select>
+
+      <button type="submit">Start Quiz</button>
+    </form>
+
+    <a href="/index.html" class="btn">Înapoi la Home</a>
+  </div>
+
+  <script>
+    // Verificăm dacă utilizatorul este logat
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!user) {
+      alert("Trebuie să fii autentificat pentru a începe quiz-ul.");
+      window.location.assign("/login.html");
+    }
+
+    // Trimite către game.html cu parametrii
+    document.getElementById("startForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const category = document.getElementById("category").value;
+      const difficulty = document.getElementById("difficulty").value;
+
+      const params = new URLSearchParams();
+      if (category) params.append("category", category);
+      if (difficulty) params.append("difficulty", difficulty);
+
+      window.location.href = `/game.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>

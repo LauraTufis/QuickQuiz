@@ -1,0 +1,74 @@
+body {
+  background-color: #ecf5ff;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 4rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #56a5eb;
+}
+
+#welcome {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin: 2rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+#topScoresList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.high-score {
+  background-color: #f1f1f1;
+  margin: 0.5rem 0;
+  padding: 1.2rem 2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Butoane */
+.btn {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: 1px solid #56a5eb;
+  background-color: white;
+  color: #56a5eb;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #56a5eb;
+  color: white;
+  cursor: pointer;
+}

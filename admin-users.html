@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestionare utilizatori</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="admin-nav.css" />
+  <style>
+    main.admin-page {
+      max-width: 1000px;
+      margin: 60px auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 3rem;
+      color: #56a5eb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #56a5eb;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    button {
+      padding: 6px 12px;
+      margin: 2px;
+      font-size: 1.4rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .role-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+
+    .role-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav class="admin-nav">
+    <a href="/admin-dashboard.html">🏠 Dashboard</a>
+    <a href="/admin-questions.html">❓ Întrebări</a>
+    <a href="/admin-users.html" class="active">👥 Utilizatori</a>
+    <a href="/admin-stats.html">📊 Statistici</a>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+
+  <main class="admin-page">
+    <h2 class="page-title">👥 Gestionare utilizatori</h2>
+    <table id="usersTable">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th>Acțiuni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Utilizatorii vor fi încărcați din JS -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!user || user.role !== "admin") {
+      alert("Acces interzis.");
+      window.location.href = "/login.html";
+    }
+
+    async function loadUsers() {
+      try {
+        const res = await fetch("http://localhost:3000/admin/users");
+        const users = await res.json();
+
+        const tbody = document.querySelector("#usersTable tbody");
+        tbody.innerHTML = "";
+
+        users.forEach(user => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${user.Username}</td>
+            <td>${user.Email}</td>
+            <td>${user.Role}</td>
+            <td>
+              <button class="delete-btn" onclick="deleteUser(${user.Id})">Șterge</button>
+              <button class="role-btn" onclick="changeRole(${user.Id}, '${user.Role}')">Schimbă rol</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("❌ Eroare la încărcarea utilizatorilor:", err);
+      }
+    }
+
+    async function deleteUser(id) {
+      if (!confirm("Ești sigur că vrei să ștergi acest utilizator?")) return;
+      try {
+        await fetch(`http://localhost:3000/users/${id}`, { method: "DELETE" });
+        alert("Utilizator șters!");
+        loadUsers();
+      } catch (err) {
+        console.error("❌ Eroare la ștergere:", err);
+      }
+    }
+
+    async function changeRole(id, currentRole) {
+      const newRole = currentRole === "admin" ? "user" : "admin";
+      try {
+        const response = await fetch(`http://localhost:3000/users/${id}/role`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ newRole }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert(data.message || "Eroare la schimbarea rolului.");
+          return;
+        }
+        alert(`Rol schimbat în ${newRole}`);
+        loadUsers();
+      } catch (err) {
+        console.error("❌ Eroare la schimbare rol:", err);
+      }
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedUser");
+      window.location.href = "/index.html";
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadUsers();
+    });
+  </script>
+</body>
+</html>

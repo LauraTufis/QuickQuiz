@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adaugă întrebare</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="admin-nav.css" />
+  <style>
+    .admin-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-title {
+      font-size: 3rem;
+      color: #56a5eb;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+
+    form input,
+    form select {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 8px;
+      font-size: 1.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    form button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 1.2rem;
+      background-color: #28a745;
+      color: white;
+      font-size: 1.6rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <nav class="admin-nav">
+    <a href="/admin-dashboard.html">🏠 Dashboard</a>
+    <a href="/admin-questions.html">❓ Întrebări</a>
+    <a href="/admin-users.html">👥 Utilizatori</a>
+    <a href="/admin-stats.html">📊 Statistici</a>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+
+  <main class="admin-container">
+    <h2 class="page-title">➕ Adaugă întrebare nouă</h2>
+    <form id="questionForm">
+      <label for="question">Întrebare:</label>
+      <input type="text" id="question" required />
+
+      <label for="choice1">Varianta 1:</label>
+      <input type="text" id="choice1" required />
+
+      <label for="choice2">Varianta 2:</label>
+      <input type="text" id="choice2" required />
+
+      <label for="choice3">Varianta 3:</label>
+      <input type="text" id="choice3" required />
+
+      <label for="choice4">Varianta 4:</label>
+      <input type="text" id="choice4" required />
+
+      <label for="correctAnswer">Răspuns corect (1-4):</label>
+      <select id="correctAnswer" required>
+          <option value="">Selectează varianta corectă</option>
+          <option value="1">Varianta 1</option>
+          <option value="2">Varianta 2</option>
+          <option value="3">Varianta 3</option>
+          <option value="4">Varianta 4</option>
+      </select>
+
+      <label for="category">Categorie:</label>
+      <select id="category" required>
+        <option value="">Selectează categoria</option>
+        <option value="Geografie">Geografie</option>
+        <option value="Istorie">Istorie</option>
+        <option value="Artă">Artă</option>
+        <option value="Matematică">Matematică</option>
+      </select>
+
+      <label for="difficulty">Dificultate:</label>
+      <select id="difficulty" required>
+        <option value="">Selectează</option>
+        <option value="easy">Ușor</option>
+        <option value="medium">Mediu</option>
+        <option value="hard">Dificil</option>
+      </select>
+
+      <button type="submit">Adaugă întrebare</button>
+    </form>
+  </main>
+
+  <script src="add-question.js"></script>
+</body>
+</html>

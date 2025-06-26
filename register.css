@@ -1,0 +1,37 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 10px;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 3.6rem;
+  text-align: center;
+  color: #56a5eb;
+  margin-bottom: 2rem;
+}
+
+.error {
+  color: red;
+  font-size: 1.4rem;
+  text-align: center;
+}

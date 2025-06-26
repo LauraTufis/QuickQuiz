@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Statistici scoruri</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="admin-nav.css" />
+
+  <style>
+    main.admin-page {
+      max-width: 800px;
+      margin: 60px auto;
+      background-color: #f8f8f8;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    h2.page-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #56a5eb;
+    }
+
+    .stats-section p {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stats-section span {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .stats-section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .stats-section li {
+      font-size: 1.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <nav class="admin-nav">
+    <a href="/admin-dashboard.html">🏠 Dashboard</a>
+    <a href="/admin-questions.html">❓ Întrebări</a>
+    <a href="/admin-users.html">👥 Utilizatori</a>
+    <a href="/admin-stats.html" class="active">📊 Statistici</a>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+
+  <main class="admin-page">
+    <h2 class="page-title">📊 Statistici Scoruri</h2>
+
+    <section class="stats-section">
+      <p><strong>Total scoruri înregistrate:</strong> <span id="totalScores">...</span></p>
+      <p><strong>Scor mediu global:</strong> <span id="averageScore">...</span></p>
+      <p><strong>Utilizatori activi:</strong> <span id="uniqueUsers">...</span></p>
+
+      <h3 style="margin-top: 3rem;">🏆 Top 5 utilizatori</h3>
+      <ul id="topUsersList">
+        <!-- Vor fi adăugate dinamic -->
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Verificare acces admin
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!user || user.role !== "admin") {
+      alert("Acces interzis.");
+      window.location.href = "/login.html";
+    }
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedUser");
+      window.location.href = "/index.html";
+    });
+
+    // Obține și afișează statisticile
+    async function loadStats() {
+      try {
+        const res = await fetch("http://localhost:3000/stats/scores");
+        const data = await res.json();
+
+        document.getElementById("totalScores").innerText = data.totalScores;
+        document.getElementById("averageScore").innerText = `${data.averageScore} puncte`;
+        document.getElementById("uniqueUsers").innerText = data.uniqueUsers;
+
+        const topUsersList = document.getElementById("topUsersList");
+        topUsersList.innerHTML = data.topUsers.map(user =>
+          `<li>${user.Username} – ${user.BestScore} puncte</li>`
+        ).join("");
+      } catch (err) {
+        console.error("❌ Eroare la încărcarea statisticilor:", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadStats);
+  </script>
+</body>
+</html>

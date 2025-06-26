@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="admin-nav.css" />
+</head>
+<body>
+  <nav class="admin-nav">
+    <a href="/admin-dashboard.html">🏠 Dashboard</a>
+    <a href="/admin-questions.html">❓ Întrebări</a>
+    <a href="/admin-users.html">👥 Utilizatori</a>
+    <a href="/admin-stats.html">📊 Statistici</a>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+
+  <main class="container flex-center flex-column text-center">
+    <h1>Salut, Admin!</h1>
+    <h2 id="questionCount">Încărcare...</h2>
+    <a href="/add-question.html" class="btn" style="margin-top: 3rem;">➕ Adaugă întrebare nouă</a>
+  </main>
+
+  <script>
+    // Verificare dacă e logat și e admin
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (!user || user.role !== "admin") {
+      alert("Acces interzis.");
+      window.location.href = "/login.html";
+    }
+
+    // Afișare număr întrebări
+    const questionCountElement = document.getElementById("questionCount");
+
+    fetch("http://localhost:3000/questions/count")
+      .then(res => res.json())
+      .then(data => {
+        questionCountElement.innerText = `Număr total de întrebări: ${data.count}`;
+      })
+      .catch(err => {
+        console.error("Eroare la încărcarea numărului de întrebări:", err);
+        questionCountElement.innerText = "Nu s-a putut încărca numărul de întrebări.";
+      });
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedUser");
+      window.location.href = "/index.html";
+    });
+  </script>
+</body>
+</html>

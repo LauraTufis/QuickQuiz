@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Quick Quiz</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container flex-center flex-column dashboard">
+    <h1 id="welcome">Salut!</h1>
+
+    <div class="section">
+      <h2>Ultimul scor</h2>
+      <p id="latestScore">–</p>
+    </div>
+
+    <div class="section">
+      <h2>Top 5 personal</h2>
+      <ul id="topScoresList"></ul>
+    </div>
+
+    <div class="section">
+      <a class="btn" href="/start.html">Începe un nou quiz</a>
+      <a class="btn" href="/index.html" id="logoutBtn">Logout</a>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
